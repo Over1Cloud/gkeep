@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="settings-container">
+    <h1 class="settings-title">Настройки</h1>
+    
+    <div class="settings-card">
+        <h2 class="settings-card-title">Информация о пользователе</h2>
+        <div class="settings-item">
+            <span class="settings-item-label">ФИО:</span>
+            <span class="settings-item-value">{{ user.first_name }} {{ user.last_name }}</span>
+        </div>
+        <div class="settings-item">
+            <span class="settings-item-label">Количество заметок:</span>
+            <span class="settings-item-value">{{ notes_count }}</span>
+        </div>
+    </div>
+
+    <div class="settings-card">
+        <h2 class="settings-card-title">Действия</h2>
+        <div class="settings-actions">
+            <a href="{{ url_for('export_db') }}" class="settings-button">
+                <span class="material-icons">cloud_download</span>
+                Экспорт
+            </a>
+            <label for="import-file" class="settings-button">
+                <span class="material-icons">cloud_upload</span>
+                Импорт
+            </label>
+            <input type="file" id="import-file" style="display: none;" accept=".zip">
+            <button onclick="confirmDeleteAccount()" class="settings-button settings-button-delete">
+                <span class="material-icons">delete_forever</span>
+                Удалить аккаунт
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmDeleteAccount() {
+    if (confirm('Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить. После удаления вам потребуется заново авторизоваться через Яндекс.')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{{ url_for("delete_account") }}';
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'confirm';
+        input.value = 'true';
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+document.getElementById('import-file').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        fetch('{{ url_for("import_db") }}', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Импорт успешно завершен. Добавлено заметок: ' + data.imported_notes_count);
+                location.reload();
+            } else {
+                alert('Ошибка при импорте: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Произошла ошибка при импорте');
+        });
+    }
+});
+</script>
+{% endblock %}

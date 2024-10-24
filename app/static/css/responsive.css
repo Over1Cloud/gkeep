@@ -1,0 +1,84 @@
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+        max-width: none;
+    }
+
+    #notes-container {
+        flex-direction: column;
+    }
+
+    .note {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .notes-actions {
+        flex-wrap: wrap;
+    }
+
+    .notes-actions .action-button {
+        flex: 1 0 40%;
+        margin: 5px;
+    }
+
+    #add-note {
+        bottom: calc(20px + 86px);
+        right: 16px;
+    }
+
+    .calendar-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .custom-select {
+        margin: 10px 0;
+    }
+
+    .month-select, .year-select {
+        flex: 1;
+    }
+
+    #info-block {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #month-year-select, .input-group {
+        flex: 1 1 100%;
+    }
+
+    #info-block span {
+        flex: 1 1 100%;
+    }
+
+    #main-content {
+        margin-top: 61px; /* 56px (высота header) + 1px (border) + 5px (разрыв) */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .note {
+        width: calc(50% - 16px);
+    }
+}
+
+@media (min-width: 1025px) {
+    #month-year-select, .input-group {
+        flex: 0 1 auto;
+    }
+
+    #info-block span {
+        flex: 0 1 auto;
+    }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Keep Clone</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-left">
+                <button id="menu-toggle" class="icon-button">
+                    <span class="material-icons">menu</span>
+                </button>
+                <a href="{{ url_for('index') }}" class="logo">
+                    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Keep Logo">
+                    <span>Маршрутник alpha</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <a href="{{ url_for('index') }}" class="sidebar-item{% if request.endpoint == 'index' %} active{% endif %}">
+            <span class="material-icons">lightbulb</span>
+            <span>Заметки</span>
+        </a>
+        <a href="{{ url_for('archive') }}" class="sidebar-item{% if request.endpoint == 'archive' %} active{% endif %}">
+            <span class="material-icons">archive</span>
+            <span>Архив</span>
+        </a>
+        <a href="{{ url_for('settings') }}" class="sidebar-item{% if request.endpoint == 'settings' %} active{% endif %}">
+            <span class="material-icons">settings</span>
+            <span>Настройки</span>
+        </a>
+    </nav>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    {% block scripts %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/info_block.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/locale/ru.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js"></script>
+    <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+</body>
+</html>

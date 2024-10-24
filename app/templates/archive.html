@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="notes-container">
+    {% for note in notes %}
+    <div class="note" data-id="{{ note.id }}">
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+        {% if note.image_url %}
+        <img src="{{ note.image_url }}" alt="Note image" style="max-width: 100%; height: auto;">
+        {% endif %}
+        {% if note.file_url %}
+        <a href="{{ note.file_url }}" target="_blank">Прикрепленный файл</a>
+        {% endif %}
+        <span class="note-date">Изменено: {{ note.get_msk_updated_at().strftime('%d.%m.%Y %H:%M') }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="fixed-footer">
+    <div class="archive-controls">
+        <button id="select-notes" class="action-button">Выбрать</button>
+        <button id="restore-selected" class="action-button" style="display: none;">Восстановить</button>
+        <button id="delete-selected" class="action-button" style="display: none;">Удалить выбранные</button>
+        <button id="delete-all" class="action-button">Удалить все</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/archive_selection_mode.js') }}"></script>
+{% endblock %}

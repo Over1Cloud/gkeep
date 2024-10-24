@@ -1,0 +1,94 @@
+#note-form {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px); /* Учитываем высоту header и footer */
+    padding: 16px;
+}
+
+#note-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    border: none;
+    background-color: transparent;
+    color: #e8eaed;
+}
+
+#note-content {
+    flex-grow: 1;
+    font-size: 16px;
+    line-height: 1.5;
+    border: none;
+    background-color: transparent;
+    color: #e8eaed;
+    resize: none;
+    overflow-y: auto;
+}
+
+#note-title::placeholder,
+#note-content::placeholder {
+    color: #9aa0a6;
+}
+
+.note-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #202124;
+    border-top: 1px solid #5f6368;
+    padding: 3px 10px; /* Уменьшаем вертикальный отступ */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-actions {
+    display: flex;
+}
+
+.note-actions button {
+    background: none;
+    border: none;
+    color: #9aa0a6;
+    cursor: pointer;
+    margin-right: 8px; /* Уменьшаем отступ между кнопками */
+    padding: 2px; /* Уменьшаем отступы кнопок */
+}
+
+.note-actions button:hover {
+    color: #e8eaed;
+}
+
+.note-date {
+    font-size: 11px; /* Уменьшаем размер шрифта */
+    color: #9aa0a6;
+}
+
+#attachments {
+    margin-top: 16px;
+}
+
+.attachment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.attachment a {
+    color: #8ab4f8;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.remove-attachment {
+    background-color: #5f6368;
+    color: #e8eaed;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.remove-attachment:hover {
+    background-color: #747775;
+}

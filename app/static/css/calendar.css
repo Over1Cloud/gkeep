@@ -1,0 +1,51 @@
+.calendar-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #303134;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.custom-select {
+    display: flex;
+    margin: 0 10px;
+}
+
+.month-select, .year-select {
+    background-color: #525355;
+    color: #e8eaed;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.month-select:focus, .year-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #8ab4f8;
+}
+
+/* Стили для Flatpickr */
+.flatpickr-calendar.dark {
+    background: #3c4043;
+    color: #e8eaed;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-calendar.dark .flatpickr-months .flatpickr-prev-month,
+.flatpickr-calendar.dark .flatpickr-months .flatpickr-next-month {
+    color: #e8eaed;
+}
+
+.flatpickr-calendar.dark .flatpickr-monthSelect-month {
+    color: #e8eaed;
+    background-color: #525355;
+}
+
+.flatpickr-calendar.dark .flatpickr-monthSelect-month:hover {
+    background-color: #6e7174;
+}
+
+.flatpickr-calendar.dark .flat
+

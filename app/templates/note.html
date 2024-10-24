@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="note-page-container">
+    <div class="note-form-container">
+        <form id="note-form" data-note-id="{{ note.id if note else '' }}">
+            <div id="attachments">
+                {% if note.attachments %}
+                    {% for attachment in note.attachments %}
+                        <div class="attachment" data-id="{{ attachment.file_url }}">
+                            <a href="{{ attachment.file_url }}" target="_blank">{{ attachment.filename }}</a>
+                            <button type="button" class="remove-attachment" data-type="file">Удалить</button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <input type="text" id="note-title" placeholder="Заголовок" value="{{ note.title if note else '' }}">
+            <textarea id="note-content" placeholder="Содержание заметки">{{ note.content if note else '' }}</textarea>
+        </form>
+    </div>
+
+    <footer class="note-footer">
+        <div class="note-actions">
+            <button type="button" id="add-image" title="Добавить изображение">
+                <span class="material-icons">image</span>
+            </button>
+            <button type="button" id="add-file" title="Прикрепить файл">
+                <span class="material-icons">attach_file</span>
+            </button>
+        </div>
+        <span class="note-date">Изменено: <time datetime="{{ note.get_msk_updated_at().isoformat() if note else '' }}">{{ note.get_msk_updated_at().strftime('%d.%m.%Y %H:%M') if note else '' }}</time></span>
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/note.js') }}"></script>
+{% endblock %}

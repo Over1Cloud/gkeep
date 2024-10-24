@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="info-block">
+    <div class="calendar-wrapper">
+        <div class="custom-select">
+            <select class="month-select"></select>
+            <select class="year-select"></select>
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="norm-hours">Норма часов:</label>
+        <input type="number" id="norm-hours" min="0" step="1">
+    </div>
+    <span id="total-hours"></span>
+    <span id="night-hours"></span>
+    <span id="salary"></span>
+    <span id="advance"></span>
+</div>
+
+<div id="notes-container">
+    {% for note in notes %}
+        <div class="note" data-id="{{ note.id }}" data-date="{{ note.created_at.strftime('%d.%m.%Y') }}">
+            <h3 class="note-title">{{ note.title }}</h3>
+            <div class="note-date">
+                <time datetime="{{ note.updated_at.isoformat() }}">
+                    {{ note.updated_at.strftime('%d.%m.%Y %H:%M') }}
+                </time>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if notes.has_prev %}
+        <a href="{{ url_for('index', page=notes.prev_num) }}">&laquo; Предыдущая</a>
+    {% endif %}
+    {% if notes.has_next %}
+        <a href="{{ url_for('index', page=notes.next_num) }}">Следующая &raquo;</a>
+    {% endif %}
+</div>
+
+<button id="add-note" class="floating-action-button">+</button>
+
+<div class="fixed-footer">
+    <div class="notes-actions">
+        <button id="select-notes" class="action-button">Выбрать</button>
+        <button id="archive-selected" class="action-button" style="display: none;">В архив</button>
+        <button id="delete-selected" class="action-button" style="display: none;">Удалить выбранные</button>
+        <button id="delete-all" class="action-button">Удалить все</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/info_block.js') }}"></script>
+<script src="{{ url_for('static', filename='js/selection_mode.js') }}"></script>
+{% endblock %}
